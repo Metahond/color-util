@@ -26,6 +26,11 @@ export class HexColor {
         throw new Error('Invalid hex string found.');
     }
 
+    /** Gets the hex value as string. */
+    public toString(): string {
+        return this.hex;
+    }
+
     /** Gets the red value of color. */
     public get red(): number {
         return this.toRGB().red;
@@ -49,6 +54,13 @@ export class RGBColor {
     private b: number;
     private a?: number | undefined;
 
+    /**
+     * Creates a new RGB color.
+     * @param r The red value.
+     * @param g The green value.
+     * @param b The blue value.
+     * @param a The alpha value.
+     */
     constructor(r: number, g: number, b: number, a?: number) {
         this.r = r;
         this.g = g;
@@ -56,22 +68,36 @@ export class RGBColor {
         this.a = a;
     }
 
+    /** Converts the RGB Color to a hex color. */
+    public toHex(): HexColor {
+        return new HexColor(
+            `#${((1 << 24) + (this.red << 16) + (this.green << 8) + this.blue)
+                .toString(16)
+                .slice(1)}`,
+        );
+    }
+
+    /** Gets the red value. */
     public get red(): number {
         return this.r;
     }
 
+    /** Gets the green value. */
     public get green(): number {
         return this.g;
     }
 
+    /** Gets the blue value. */
     public get blue(): number {
         return this.b;
     }
 
+    /** Gets the alpha value if set. */
     public get alpha(): number | undefined {
         return this.a;
     }
 
+    /** Gets the RGBColor object as string. */
     public toString(): string {
         return `{red: ${this.r}, green: ${this.g}, blue: ${this.b}${
             this.a ? ', alpha: ' + this.a : ''
@@ -82,11 +108,8 @@ export class RGBColor {
 /** A color in HSL format. */
 export class HSLColor {
     private h: number;
-
     private s: number;
-
     private l: number;
-
     private a?: number;
 
     /** Creates a new HSL color. */
@@ -118,14 +141,11 @@ export class HSLColor {
     }
 }
 
-/** A color in HSB format. */
+/** A color in HSB/HSV format. */
 export class HSBColor {
     private h: number;
-
     private s: number;
-
     private b: number;
-
     private a?: number;
 
     /** Creates a new HSB color. */
@@ -160,11 +180,8 @@ export class HSBColor {
 /** A color in HWB format. */
 export class HWBColor {
     private h: number;
-
     private w: number;
-
     private b: number;
-
     private a?: number;
 
     /** Creates a new HWB color. */
@@ -199,11 +216,8 @@ export class HWBColor {
 /** A color in CYMK format. */
 export class CYMKColor {
     private c: number;
-
     private y: number;
-
     private m: number;
-
     private k: number;
 
     /** Creates a new CYMK color. */
