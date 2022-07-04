@@ -101,11 +101,11 @@ export class RGBColor {
                     break;
 
                 case g1:
-                    h = 60 * (((b1 - r1) / cDelta) + 2);
+                    h = 60 * ((b1 - r1) / cDelta + 2);
                     break;
 
                 case b1:
-                    h = 60 * (((r1 - g1) / cDelta) + 4);
+                    h = 60 * ((r1 - g1) / cDelta + 4);
                     break;
             }
         }
@@ -143,7 +143,9 @@ export class RGBColor {
     /** Gets the RGBColor object as string. */
     public toString(): string {
         if (this.alpha) {
-            return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
+            return `rgba(${this.red.toFixed(0)}, ${this.green}, ${this.blue}, ${
+                this.alpha
+            })`;
         } else {
             return `rgb(${this.red}, ${this.green}, ${this.blue})`;
         }
@@ -168,9 +170,11 @@ export class HSLColor {
     public toRGB(): RGBColor {
         const c = (1 - Math.abs(2 * this.lightness - 1)) * this.saturation;
         const h1 = this.hue / 60;
-        const x = c * (1 - Math.abs(h1 % 2 - 1));
+        const x = c * (1 - Math.abs((h1 % 2) - 1));
 
-        let r = 0, g = 0, b = 0;
+        let r = 0,
+            g = 0,
+            b = 0;
         if (h1 >= 0 && h1 < 1) {
             r = c;
             g = x;
@@ -198,8 +202,12 @@ export class HSLColor {
         }
 
         const m = this.lightness - c / 2;
-
-        return new RGBColor((r + m) * 255, (g + m) * 255, (b + m) * 255, this.alpha);
+        return new RGBColor(
+            Math.round((r + m) * 255),
+            Math.round((g + m) * 255),
+            Math.round((b + m) * 255),
+            this.alpha,
+        );
     }
 
     /** Gets the hue value of the color in degrees. */
@@ -228,7 +236,9 @@ export class HSLColor {
                 1,
             )}%, ${(this.lightness * 100).toFixed(1)}%, ${this.alpha})`;
         } else {
-            return `hsl(${this.hue}°, ${(this.saturation * 100).toFixed(1)}%, ${(this.lightness * 100).toFixed(1)}%)`;
+            return `hsl(${this.hue}°, ${(this.saturation * 100).toFixed(
+                1,
+            )}%, ${(this.lightness * 100).toFixed(1)}%)`;
         }
     }
 }

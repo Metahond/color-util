@@ -37,6 +37,6 @@ Deno.test('test hsl_to_rgb', () => {
     const secondColor = new HSLColor(120, 1, 0.5);
     assertEquals(secondColor.toRGB().toString(), 'rgb(0, 255, 0)');
 
-    const thirdColor = new HSLColor(240, 1, 0.5);
-    assertEquals(thirdColor.toRGB().toString(), 'rgb(0, 0, 255)');
+    const thirdColor = new HSLColor(202, 0.712, 0.476);
+    assertEquals(thirdColor.toRGB().toString(), 'rgb(35, 144, 208)');
 });
