@@ -1,5 +1,5 @@
-import { assertEquals } from "https://deno.land/std@0.146.0/testing/asserts.ts";
-import { HexColor, HSLColor, RGBColor } from "./mod.ts";
+import { assertEquals } from 'https://deno.land/std@0.146.0/testing/asserts.ts';
+import { HexColor, HSBColor, HSLColor, RGBColor } from './mod.ts';
 
 /** Tests hex to RGB convertion. */
 Deno.test('test hex_to_rgb', () => {
@@ -39,4 +39,48 @@ Deno.test('test hsl_to_rgb', () => {
 
     const thirdColor = new HSLColor(202, 0.712, 0.476);
     assertEquals(thirdColor.toRGB().toString(), 'rgb(35, 144, 208)');
+});
+
+Deno.test('test rgb_to_hsb', () => {
+    const rgbColor = new RGBColor(255, 0, 0);
+    assertEquals(rgbColor.toHSB().toString(), 'hsb(0°, 100.0%, 100.0%)');
+
+    const secondColor = new RGBColor(0, 255, 0);
+    assertEquals(secondColor.toHSB().toString(), 'hsb(120°, 100.0%, 100.0%)');
+
+    const thirdColor = new RGBColor(77, 246, 115);
+    assertEquals(thirdColor.toHSB().toString(), 'hsb(133°, 68.7%, 96.5%)');
+});
+
+Deno.test('test hsb_to_rgb', () => {
+    const hsbColor = new HSBColor(0, 1, 1);
+    assertEquals(hsbColor.toRGB().toString(), 'rgb(255, 0, 0)');
+
+    const secondColor = new HSBColor(120, 1, 1);
+    assertEquals(secondColor.toRGB().toString(), 'rgb(0, 255, 0)');
+
+    const thirdColor = new HSBColor(202, 0.712, 0.476);
+    assertEquals(thirdColor.toRGB().toString(), 'rgb(35, 90, 121)');
+});
+
+Deno.test('test hsl_to_hsb', () => {
+    const hsbColor = new HSLColor(255, 0.4, .3);
+    assertEquals(hsbColor.toHSB().toString(), 'hsb(255°, 57.1%, 42.0%)');
+
+    const secondColor = new HSLColor(0, 0.45, 0.75);
+    assertEquals(secondColor.toHSB().toString(), 'hsb(0°, 26.1%, 86.3%)');
+
+    const thirdColor = new HSLColor(100, 1, 0.5);
+    assertEquals(thirdColor.toHSB().toString(), 'hsb(100°, 100.0%, 100.0%)');
+});
+
+Deno.test('test hsb_to_hsl', () => {
+    const hsbColor = new HSBColor(255, 0.57, 0.42);
+    assertEquals(hsbColor.toHSL().toString(), 'hsl(255°, 39.9%, 30.0%)');
+
+    const secondColor = new HSBColor(0, 1, 0.25);
+    assertEquals(secondColor.toHSL().toString(), 'hsl(0°, 100.0%, 12.5%)');
+
+    const thirdColor = new HSBColor(100, 1, 1);
+    assertEquals(thirdColor.toHSL().toString(), 'hsl(100°, 100.0%, 50.0%)');
 });
