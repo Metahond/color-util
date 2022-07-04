@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.146.0/testing/asserts.ts";
-import { HexColor, RGBColor } from "./mod.ts";
+import { HexColor, HSLColor, RGBColor } from "./mod.ts";
 
 /** Tests hex to RGB convertion. */
 Deno.test('test hex_to_rgb', () => {
@@ -28,4 +28,15 @@ Deno.test('test rgb_to_hsl', () => {
 
     const thirdColor = new RGBColor(0, 0, 255);
     assertEquals(thirdColor.toHSL().toString(), 'hsl(240°, 100.0%, 50.0%)');
+});
+
+Deno.test('test hsl_to_rgb', () => {
+    const hslColor = new HSLColor(0, 1, 0.5);
+    assertEquals(hslColor.toRGB().toString(), 'rgb(255, 0, 0)');
+
+    const secondColor = new HSLColor(120, 1, 0.5);
+    assertEquals(secondColor.toRGB().toString(), 'rgb(0, 255, 0)');
+
+    const thirdColor = new HSLColor(240, 1, 0.5);
+    assertEquals(thirdColor.toRGB().toString(), 'rgb(0, 0, 255)');
 });
