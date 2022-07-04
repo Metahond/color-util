@@ -83,6 +83,47 @@ export class RGBColor {
         );
     }
 
+    /** Converts the RGB Color to a HSL color. */
+    public toHSL(): HSLColor {
+        const r1 = this.red / 255;
+        const g1 = this.green / 255;
+        const b1 = this.blue / 255;
+        console.log('R = ' + r1 + ', G = ' + g1 + ', B = ' + b1)
+
+        const cMax = Math.max(r1, g1, b1);
+        const cMin = Math.min(r1, g1, b1);
+        const cDelta = cMax - cMin;
+        console.log('C_MAX = ' + cMax + ', C_MIN = ' + cMin + ', DELTA = ' + cDelta);
+
+        let h = 0;
+        if (cDelta !== 0) {
+            switch (cMax) {
+                case r1:
+                    h = 60 * ((g1 - b1) / cDelta + (g1 < b1 ? 6 : 0));
+                    break;
+
+                case g1:
+                    h = 60 * (((b1 - r1) / cDelta) + 2);
+                    console.debug('h at G: ', h);
+                    break;
+
+                case b1:
+                    h = 60 * (((r1 - g1) / cDelta) + 4);
+                    console.debug('h at B: ', h);
+                    break;
+            }
+        }
+
+        const l = (cMax + cMin) / 2;
+
+        let s = 0;
+        if (cDelta !== 0) {
+            s = cDelta / (1 - Math.abs(2 * l - 1));
+        }
+
+        return new HSLColor(h, s, l, this.alpha);
+    }
+
     /** Gets the red value. */
     public get red(): number {
         return this.r;
@@ -146,6 +187,16 @@ export class HSLColor {
     /** Gets the alpha value of the color if set. */
     public get alpha(): number | undefined {
         return this.a;
+    }
+
+    public toString(): string {
+        if (this.alpha) {
+            return `hsla(${this.hue}°, ${(this.saturation * 100).toFixed(
+                1,
+            )}%, ${(this.lightness * 100).toFixed(1)}%, ${this.alpha})`;
+        } else {
+            return `hsl(${this.hue}°, ${(this.saturation * 100).toFixed(1)}%, ${(this.lightness * 100).toFixed(1)}%)`;
+        }
     }
 }
 
