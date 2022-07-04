@@ -120,6 +120,21 @@ export class RGBColor {
         return new HSLColor(h, s, l, this.alpha);
     }
 
+    /** Converts the RGB Color to a HSB color. */
+    public toHSB(): HSBColor {
+        const hsl = this.toHSL();
+        const cMax = Math.max(
+            this.red / 255,
+            this.green / 255,
+            this.blue / 255,
+        );
+        const delta =
+            cMax - Math.min(this.red / 255, this.green / 255, this.blue / 255);
+        const s = cMax === 0 ? 0 : delta / cMax;
+
+        return new HSBColor(hsl.hue, s, cMax);
+    }
+
     /** Gets the red value. */
     public get red(): number {
         return this.r;
@@ -167,6 +182,7 @@ export class HSLColor {
         this.a = a;
     }
 
+    /** Converts the HSL Color to a RGB color. */
     public toRGB(): RGBColor {
         const c = (1 - Math.abs(2 * this.lightness - 1)) * this.saturation;
         const h1 = this.hue / 60;
@@ -232,13 +248,15 @@ export class HSLColor {
 
     public toString(): string {
         if (this.alpha) {
-            return `hsla(${this.hue}°, ${(this.saturation * 100).toFixed(
-                1,
-            )}%, ${(this.lightness * 100).toFixed(1)}%, ${this.alpha})`;
+            return `hsla(${this.hue.toFixed(0)}°, ${(
+                this.saturation * 100
+            ).toFixed(1)}%, ${(this.lightness * 100).toFixed(1)}%, ${
+                this.alpha
+            })`;
         } else {
-            return `hsl(${this.hue}°, ${(this.saturation * 100).toFixed(
-                1,
-            )}%, ${(this.lightness * 100).toFixed(1)}%)`;
+            return `hsl(${this.hue.toFixed(0)}°, ${(
+                this.saturation * 100
+            ).toFixed(1)}%, ${(this.lightness * 100).toFixed(1)}%)`;
         }
     }
 }
@@ -256,6 +274,50 @@ export class HSBColor {
         this.s = s;
         this.b = b;
         this.a = a;
+    }
+
+    /** Converts the HSB Color to a RGB color. */
+    public toRGB() {
+        const c = this.brightness * this.saturation;
+        const h1 = this.hue / 60;
+        const x = c * (1 - Math.abs((h1 % 2) - 1));
+
+        let r = 0,
+            g = 0,
+            b = 0;
+        if (h1 >= 0 && h1 < 1) {
+            r = c;
+            g = x;
+            b = 0;
+        } else if (h1 >= 1 && h1 < 2) {
+            r = x;
+            g = c;
+            b = 0;
+        } else if (h1 >= 2 && h1 < 3) {
+            r = 0;
+            g = c;
+            b = x;
+        } else if (h1 >= 3 && h1 < 4) {
+            r = 0;
+            g = x;
+            b = c;
+        } else if (h1 >= 4 && h1 < 5) {
+            r = x;
+            g = 0;
+            b = c;
+        } else if (h1 >= 5 && h1 < 6) {
+            r = c;
+            g = 0;
+            b = x;
+        }
+
+        const m = this.brightness - c;
+        return new RGBColor(
+            Math.round((r + m) * 255),
+            Math.round((g + m) * 255),
+            Math.round((b + m) * 255),
+            this.alpha,
+        );
     }
 
     /** Gets the hue value of the color in degrees. */
@@ -276,6 +338,20 @@ export class HSBColor {
     /** Gets the alpha value of the color if set. */
     public get alpha(): number | undefined {
         return this.a;
+    }
+
+    public toString(): string {
+        if (this.alpha) {
+            return `hsba(${this.hue.toFixed(0)}°, ${(
+                this.saturation * 100
+            ).toFixed(1)}%, ${(this.brightness * 100).toFixed(1)}%, ${
+                this.alpha
+            })`;
+        } else {
+            return `hsb(${this.hue.toFixed(0)}°, ${(
+                this.saturation * 100
+            ).toFixed(1)}%, ${(this.brightness * 100).toFixed(1)}%)`;
+        }
     }
 }
 
