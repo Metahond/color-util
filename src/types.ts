@@ -304,7 +304,7 @@ export class HSBColor {
     }
 
     /** Converts the HSB Color to a RGB color. */
-    public toRGB() {
+    public toRGB(): RGBColor {
         const c = this.brightness * this.saturation;
         const h1 = this.hue / 60;
         const x = c * (1 - Math.abs((h1 % 2) - 1));
@@ -345,6 +345,23 @@ export class HSBColor {
             Math.round((b + m) * 255),
             this.alpha,
         );
+    }
+
+    /** Converts the HSB color to a hex color. */
+    public toHex(): HexColor {
+        return this.toRGB().toHex();
+    }
+
+    /** Converts the HSB color to a HSL color. */
+    public toHSL(): HSLColor {
+        const h = this.hue;
+        const l = this.brightness * (1 - this.saturation / 2);
+        let s = 0;
+        if (l !== 0 && l !== 1) {
+            s = (this.brightness - l) / Math.min(l, 1 - l);
+        }
+
+        return new HSLColor(h, s, l, this.alpha);
     }
 
     /** Gets the hue value of the color in degrees. */

@@ -73,3 +73,14 @@ Deno.test('test hsl_to_hsb', () => {
     const thirdColor = new HSLColor(100, 1, 0.5);
     assertEquals(thirdColor.toHSB().toString(), 'hsb(100°, 100.0%, 100.0%)');
 });
+
+Deno.test('test hsb_to_hsl', () => {
+    const hsbColor = new HSBColor(255, 0.57, 0.42);
+    assertEquals(hsbColor.toHSL().toString(), 'hsl(255°, 39.9%, 30.0%)');
+
+    const secondColor = new HSBColor(0, 1, 0.25);
+    assertEquals(secondColor.toHSL().toString(), 'hsl(0°, 100.0%, 12.5%)');
+
+    const thirdColor = new HSBColor(100, 1, 1);
+    assertEquals(thirdColor.toHSL().toString(), 'hsl(100°, 100.0%, 50.0%)');
+});
