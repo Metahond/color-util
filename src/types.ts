@@ -99,9 +99,11 @@ export class RGBColor {
 
     /** Gets the RGBColor object as string. */
     public toString(): string {
-        return `{red: ${this.r}, green: ${this.g}, blue: ${this.b}${
-            this.a ? ', alpha: ' + this.a : ''
-        }}`;
+        if (this.alpha) {
+            return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`
+        } else {
+            return `rgb(${this.red}, ${this.green}, ${this.blue})`;
+        }
     }
 }
 
