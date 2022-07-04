@@ -32,6 +32,16 @@ export class HexColor {
         throw new Error('Invalid hex string found.');
     }
 
+    /** Converts a hex color to a HSL color. */
+    public toHSL(): HSLColor {
+        return this.toRGB().toHSL();
+    }
+
+    /** Converts a hex color to a HSB color. */
+    public toHSB(): HSBColor {
+        return this.toRGB().toHSB();
+    }
+
     /** Gets the hex value as string. */
     public toString(): string {
         return this.hex;
@@ -224,6 +234,23 @@ export class HSLColor {
             Math.round((b + m) * 255),
             this.alpha,
         );
+    }
+
+    /** Converts a HSL color to a hex color. */
+    public toHex(): HexColor {
+        return this.toRGB().toHex();
+    }
+
+    /** Converts a HSL color to a HSB color. */
+    public toHSB(): HSBColor {
+        const h = this.hue;
+        const b = this.lightness + this.saturation * Math.min(this.lightness, 1 - this.lightness);
+        let s = 0;
+        if (b !== 0) {
+            s = 2 * (1 - this.lightness / b);
+        }
+
+        return new HSBColor(h, s, b, this.alpha);
     }
 
     /** Gets the hue value of the color in degrees. */
