@@ -165,6 +165,43 @@ export class HSLColor {
         this.a = a;
     }
 
+    public toRGB(): RGBColor {
+        const c = (1 - Math.abs(2 * this.lightness - 1)) * this.saturation;
+        const h1 = this.hue / 60;
+        const x = c * (1 - Math.abs(h1 % 2 - 1));
+
+        let r = 0, g = 0, b = 0;
+        if (h1 >= 0 && h1 < 1) {
+            r = c;
+            g = x;
+            b = 0;
+        } else if (h1 >= 1 && h1 < 2) {
+            r = x;
+            g = c;
+            b = 0;
+        } else if (h1 >= 2 && h1 < 3) {
+            r = 0;
+            g = c;
+            b = x;
+        } else if (h1 >= 3 && h1 < 4) {
+            r = 0;
+            g = x;
+            b = c;
+        } else if (h1 >= 4 && h1 < 5) {
+            r = x;
+            g = 0;
+            b = c;
+        } else if (h1 >= 5 && h1 < 6) {
+            r = c;
+            g = 0;
+            b = x;
+        }
+
+        const m = this.lightness - c / 2;
+
+        return new RGBColor((r + m) * 255, (g + m) * 255, (b + m) * 255, this.alpha);
+    }
+
     /** Gets the hue value of the color in degrees. */
     public get hue(): number {
         return this.h;
