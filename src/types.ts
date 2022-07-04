@@ -88,12 +88,10 @@ export class RGBColor {
         const r1 = this.red / 255;
         const g1 = this.green / 255;
         const b1 = this.blue / 255;
-        console.log('R = ' + r1 + ', G = ' + g1 + ', B = ' + b1)
 
         const cMax = Math.max(r1, g1, b1);
         const cMin = Math.min(r1, g1, b1);
         const cDelta = cMax - cMin;
-        console.log('C_MAX = ' + cMax + ', C_MIN = ' + cMin + ', DELTA = ' + cDelta);
 
         let h = 0;
         if (cDelta !== 0) {
@@ -104,12 +102,10 @@ export class RGBColor {
 
                 case g1:
                     h = 60 * (((b1 - r1) / cDelta) + 2);
-                    console.debug('h at G: ', h);
                     break;
 
                 case b1:
                     h = 60 * (((r1 - g1) / cDelta) + 4);
-                    console.debug('h at B: ', h);
                     break;
             }
         }
