@@ -1,4 +1,11 @@
-import { CYMKColor, HexColor, HSBColor, HSLColor, HWBColor, RGBColor } from "./src/types.ts";
+import {
+    CYMKColor,
+    HexColor,
+    HSLColor,
+    HSBColor,
+    HWBColor,
+    RGBColor,
+} from './colors/mod.ts';
 
 /**
  * Gets a hex color object.
@@ -11,13 +18,13 @@ export function hex(hex: string): HexColor {
 
 /**
  * Gets a RGB color object.
- * @param r The red value. 
+ * @param r The red value.
  * @param g The green value.
  * @param b The blue value.
  * @param a The alpha value.
  * @returns A RGB color object.
  */
-export function rgb(r: number, g: number, b: number, a?: number) {
+export function rgb(r: number, g: number, b: number, a?: number): RGBColor {
     return new RGBColor(r, g, b, a);
 }
 
@@ -29,7 +36,7 @@ export function rgb(r: number, g: number, b: number, a?: number) {
  * @param a The alpha value.
  * @returns A HSL color object.
  */
-export function hsl(h: number, s: number, l: number, a?: number) {
+export function hsl(h: number, s: number, l: number, a?: number): HSLColor {
     return new HSLColor(h, s, l, a);
 }
 
@@ -41,7 +48,7 @@ export function hsl(h: number, s: number, l: number, a?: number) {
  * @param a The alpha value.
  * @returns A HSB/HSV color object.
  */
-export function hsb(h: number, s: number, b: number, a?: number) {
+export function hsb(h: number, s: number, b: number, a?: number): HSBColor {
     return new HSBColor(h, s, b, a);
 }
 
@@ -53,7 +60,7 @@ export function hsb(h: number, s: number, b: number, a?: number) {
  * @param a The alpha value.
  * @returns A HWB color object.
  */
-export function hwb(h: number, w: number, b: number, a?: number) {
+export function hwb(h: number, w: number, b: number, a?: number): HWBColor {
     return new HWBColor(h, w, b, a);
 }
 
@@ -64,8 +71,8 @@ export function hwb(h: number, w: number, b: number, a?: number) {
  * @param m The magenta value.
  * @param k The key (black) value.
  */
-export function cymk(c: number, y: number, m: number, k: number) {
+export function cymk(c: number, y: number, m: number, k: number): CYMKColor {
     return new CYMKColor(c, y, m, k);
 }
 
-export * from './src/types.ts';
+export * from './colors/mod.ts';
