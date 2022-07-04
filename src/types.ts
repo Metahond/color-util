@@ -1,4 +1,10 @@
-export type Colors = 'hex' | 'rgb' | 'hsl' | 'hsb' | 'hwb' | 'cymk';
+export type Colors =
+    | HexColor
+    | RGBColor
+    | HSLColor
+    | HSBColor
+    | HWBColor
+    | CYMKColor;
 
 /** A color in hex format. */
 export class HexColor {
@@ -100,7 +106,7 @@ export class RGBColor {
     /** Gets the RGBColor object as string. */
     public toString(): string {
         if (this.alpha) {
-            return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`
+            return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
         } else {
             return `rgb(${this.red}, ${this.green}, ${this.blue})`;
         }
