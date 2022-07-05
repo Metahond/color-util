@@ -10,7 +10,7 @@ https://deno.land/x/color_util/mod.ts
 ```
 
 Here is a quick example of how to convert a hex color to a RGB color:
-```
+```ts
 import { hex, RGBColor } from 'https://deno.land/x/color_util/mod.ts';
 
 const rgbColor: RGBColor = hex('#ff0000').toRGB();
