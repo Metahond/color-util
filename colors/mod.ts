@@ -1,4 +1,4 @@
-export * from './cymkcolor.ts';
+export * from './cmykcolor.ts';
 export * from './hexcolor.ts';
 export * from './hsbcolor.ts';
 export * from './hslcolor.ts';

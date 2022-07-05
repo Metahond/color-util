@@ -1,4 +1,4 @@
-import { HexColor, HSLColor, HWBColor, RGBColor } from "./mod.ts";
+import { CMYKColor, HexColor, HSLColor, HWBColor, RGBColor } from "./mod.ts";
 
 /** A color in HSB/HSV format. */
 export class HSBColor {
@@ -57,6 +57,10 @@ export class HSBColor {
             Math.round((b + m) * 255),
             this.alpha,
         );
+    }
+
+    public toCMYK(): CMYKColor {
+        return this.toRGB().toCMYK();
     }
 
     /** Converts the HSB color to a hex color. */

@@ -1,4 +1,4 @@
-import { HexColor, HSBColor, RGBColor } from "./mod.ts";
+import { CMYKColor, HexColor, HSBColor, HWBColor, RGBColor } from "./mod.ts";
 
 /** A color in HSL format. */
 export class HSLColor {
@@ -64,6 +64,11 @@ export class HSLColor {
         return this.toRGB().toHex();
     }
 
+    /** Convers the HSL color to a CMYK color. */
+    public toCMYK(): CMYKColor {
+        return this.toRGB().toCMYK();
+    }
+
     /** Converts a HSL color to a HSB color. */
     public toHSB(): HSBColor {
         const h = this.hue;
@@ -76,6 +81,11 @@ export class HSLColor {
         }
 
         return new HSBColor(h, s, b, this.alpha);
+    }
+
+    /** Converts the HSL color to a HWB color. */
+    public toHWB(): HWBColor {
+        return this.toHSB().toHWB();
     }
 
     /** Gets the hue value of the color in degrees. */

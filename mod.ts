@@ -1,5 +1,5 @@
 import {
-    CYMKColor,
+    CMYKColor,
     HexColor,
     HSLColor,
     HSBColor,
@@ -65,14 +65,14 @@ export function hwb(h: number, w: number, b: number, a?: number): HWBColor {
 }
 
 /**
- * Gets a CYMK color object.
+ * Gets a CMYK color object.
  * @param c The cyan value.
- * @param y The yellow value.
  * @param m The magenta value.
+ * @param y The yellow value.
  * @param k The key (black) value.
  */
-export function cymk(c: number, y: number, m: number, k: number): CYMKColor {
-    return new CYMKColor(c, y, m, k);
+export function cmyk(c: number, m: number, y: number, k: number): CMYKColor {
+    return new CMYKColor(c, y, m, k);
 }
 
 export * from './colors/mod.ts';
