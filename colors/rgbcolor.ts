@@ -1,4 +1,4 @@
-import { HexColor, HSBColor, HSLColor } from "./mod.ts";
+import { HexColor, HSBColor, HSLColor, HWBColor } from "./mod.ts";
 
 /** A color in RGB format. */
 export class RGBColor {
@@ -80,6 +80,11 @@ export class RGBColor {
         const s = cMax === 0 ? 0 : delta / cMax;
 
         return new HSBColor(hsl.hue, s, cMax);
+    }
+
+    /** Converts the RGB color to a HWB color. */
+    public toHWB(): HWBColor {
+        return this.toHSB().toHWB();
     }
 
     /** Gets the red value. */

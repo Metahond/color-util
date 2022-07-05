@@ -31,3 +31,14 @@ Deno.test('test rgb_to_hsb', () => {
     const thirdColor = new RGBColor(77, 246, 115);
     assertEquals(thirdColor.toHSB().toString(), 'hsb(133°, 68.7%, 96.5%)');
 });
+
+Deno.test('test rgb_to_hwb', () => {
+    const rgbColor = new RGBColor(255, 0, 0);
+    assertEquals(rgbColor.toHWB().toString(), 'hwb(0°, 0.0%, 0.0%)');
+
+    const secondColor = new RGBColor(0, 255, 0);
+    assertEquals(secondColor.toHWB().toString(), 'hwb(120°, 0.0%, 0.0%)');
+
+    const thirdColor = new RGBColor(77, 246, 115);
+    assertEquals(thirdColor.toHWB().toString(), 'hwb(133°, 30.2%, 3.5%)');
+});

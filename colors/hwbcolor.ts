@@ -1,3 +1,5 @@
+import { HSBColor, RGBColor } from "./mod.ts";
+
 /** A color in HWB format. */
 export class HWBColor {
     private h: number;
@@ -11,6 +13,19 @@ export class HWBColor {
         this.w = w;
         this.b = b;
         this.a = a;
+    }
+
+    /** Converts the HWB color to a HSB color. */
+    public toHSB(): HSBColor {
+        const s = 1 - this.whiteness / (1 - this.blackness);
+        const b = 1 - this.blackness;
+
+        return new HSBColor(this.hue, s, b, this.alpha);
+    }
+
+    /** Converts the HWB color to a RGB color. */
+    public toRGB(): RGBColor {
+        return this.toHSB().toRGB();
     }
 
     /** Gets the hue value of the color in degrees. */
@@ -31,5 +46,20 @@ export class HWBColor {
     /** Gets the alpha value of the color if set. */
     public get alpha(): number | undefined {
         return this.a;
+    }
+
+    /** Gets the HWBColor object as string. */
+    public toString(): string {
+        if (this.alpha) {
+            return `hwba(${this.hue.toFixed(0)}°, ${(
+                this.whiteness * 100
+            ).toFixed(1)}%, ${(this.blackness * 100).toFixed(1)}%, ${
+                this.alpha
+            })`;
+        } else {
+            return `hwb(${this.hue.toFixed(0)}°, ${(
+                this.whiteness * 100
+            ).toFixed(1)}%, ${(this.blackness * 100).toFixed(1)}%)`;
+        }
     }
 }

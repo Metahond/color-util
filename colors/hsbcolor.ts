@@ -1,4 +1,4 @@
-import { HexColor, HSLColor, RGBColor } from "./mod.ts";
+import { HexColor, HSLColor, HWBColor, RGBColor } from "./mod.ts";
 
 /** A color in HSB/HSV format. */
 export class HSBColor {
@@ -76,6 +76,19 @@ export class HSBColor {
         return new HSLColor(h, s, l, this.alpha);
     }
 
+    /** Converts the HSB Color to a HSL color. */
+    public toHWB(): HWBColor {
+        const h = this.hue;
+        let w = this.brightness * (1 - this.saturation);
+        let b = 1 - this.brightness;
+        if (w + b > 100) {
+            w /= 100;
+            b /= 100;
+        }
+
+        return new HWBColor(h, w, b, this.alpha);
+    }
+
     /** Gets the hue value of the color in degrees. */
     public get hue(): number {
         return this.h;
@@ -96,6 +109,7 @@ export class HSBColor {
         return this.a;
     }
 
+    /** Gets the HSBColor object as string. */
     public toString(): string {
         if (this.alpha) {
             return `hsba(${this.hue.toFixed(0)}°, ${(
