@@ -24,3 +24,6 @@ If you want to contribute to this project, feel free to choose an issue and crea
 
 # 🤷‍♀️ Support
 If you need help with this library, check out our [Discord server](https://discord.metahond.codes) for help!
+
+# ⚖️ License
+This project is licensed under the [Apache 2.0 license](./LICENSE).
