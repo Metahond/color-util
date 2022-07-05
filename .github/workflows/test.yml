@@ -16,4 +16,4 @@ jobs:
         with:
           deno-version: v1.23.2
       - name: Test Deno Module
-        run: deno test tests.ts
+        run: deno test tests/
