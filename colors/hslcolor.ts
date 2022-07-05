@@ -98,6 +98,7 @@ export class HSLColor {
         return this.a;
     }
 
+    /** Gets the HSLColor object as string. */
     public toString(): string {
         if (this.alpha) {
             return `hsla(${this.hue.toFixed(0)}°, ${(
