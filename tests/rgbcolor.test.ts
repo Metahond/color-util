@@ -42,3 +42,14 @@ Deno.test('test rgb_to_hwb', () => {
     const thirdColor = new RGBColor(77, 246, 115);
     assertEquals(thirdColor.toHWB().toString(), 'hwb(133°, 30.2%, 3.5%)');
 });
+
+Deno.test('test rgb_to_cmyk', () => {
+    const rgbColor = new RGBColor(255, 0, 0);
+    assertEquals(rgbColor.toCMYK().toString(), 'cmyk(0%, 100%, 100%, 0%)');
+
+    const secondColor = new RGBColor(0, 255, 0);
+    assertEquals(secondColor.toCMYK().toString(), 'cmyk(100%, 0%, 100%, 0%)');
+
+    const thirdColor = new RGBColor(77, 246, 115);
+    assertEquals(thirdColor.toCMYK().toString(), 'cmyk(69%, 0%, 53%, 4%)');
+});

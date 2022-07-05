@@ -1,4 +1,4 @@
-import { HexColor, HSBColor, HSLColor, HWBColor } from "./mod.ts";
+import { CMYKColor, HexColor, HSBColor, HSLColor, HWBColor } from "./mod.ts";
 
 /** A color in RGB format. */
 export class RGBColor {
@@ -19,6 +19,20 @@ export class RGBColor {
         this.g = g;
         this.b = b;
         this.a = a;
+    }
+
+    /** Converts the RGB color to a CMYK color. */
+    public toCMYK(): CMYKColor {
+        const r = this.red / 255;
+        const g = this.green / 255;
+        const b = this.blue / 255;
+
+        const k = 1 - Math.max(r, g, b);
+        const c = (1 - r - k) / (1 - k);
+        const m = (1 - g - k) / (1 - k);
+        const y = (1 - b - k) / (1 - k);
+
+        return new CMYKColor(c, m, y, k);
     }
 
     /** Converts the RGB Color to a hex color. */
@@ -110,11 +124,13 @@ export class RGBColor {
     /** Gets the RGBColor object as string. */
     public toString(): string {
         if (this.alpha) {
-            return `rgba(${this.red.toFixed(0)}, ${this.green}, ${this.blue}, ${
-                this.alpha
+            return `rgba(${Math.round(this.red)}, ${Math.round(this.green)}, ${Math.round(this.blue)}, ${
+                Math.round(this.alpha)
             })`;
         } else {
-            return `rgb(${this.red}, ${this.green}, ${this.blue})`;
+            return `rgb(${Math.round(this.red)}, ${Math.round(
+                this.green,
+            )}, ${Math.round(this.blue)})`;
         }
     }
 }

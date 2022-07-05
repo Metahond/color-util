@@ -1,4 +1,4 @@
-import { HSLColor, HSBColor, RGBColor } from './mod.ts';
+import { CMYKColor, HSLColor, HSBColor, RGBColor, HWBColor } from './mod.ts';
 
 /** A color in hex format. */
 export class HexColor {
@@ -26,6 +26,11 @@ export class HexColor {
         throw new Error('Invalid hex string found.');
     }
 
+    /** Converts a hex color to a CMYK color. */
+    public toCMYK(): CMYKColor {
+        return this.toRGB().toCMYK();
+    }
+
     /** Converts a hex color to a HSL color. */
     public toHSL(): HSLColor {
         return this.toRGB().toHSL();
@@ -34,6 +39,11 @@ export class HexColor {
     /** Converts a hex color to a HSB color. */
     public toHSB(): HSBColor {
         return this.toRGB().toHSB();
+    }
+
+    /** Converts a hex color to a HWB color. */
+    public toHWB(): HWBColor {
+        return this.toRGB().toHWB();
     }
 
     /** Gets the hex value as string. */
