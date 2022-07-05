@@ -6,7 +6,7 @@ report them on our Discord or open an issue on GitHub directly.
 # ⚙️ Usage
 To use this library in your project, you'll need to import the `mod.ts` file from this URL:
 ```
-https://deno.land/x/color_util
+https://deno.land/x/color_util/mod.ts
 ```
 
 # 📚 Contribution
