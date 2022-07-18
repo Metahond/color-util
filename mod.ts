@@ -75,4 +75,55 @@ export function cmyk(c: number, m: number, y: number, k: number): CMYKColor {
     return new CMYKColor(c, y, m, k);
 }
 
+/** Generates a random RGB color. */
+export function randomRGB(): RGBColor {
+    return rgb(
+        Math.round(Math.random() * 255),
+        Math.round(Math.random() * 255),
+        Math.round(Math.random() * 255),
+    );
+}
+
+/** Generates a random hex color. */
+export function randomHex(): HexColor {
+    return randomRGB().toHex();
+}
+
+/** Generates a random HSL color. */
+export function randomHSL(): HSLColor {
+    return hsl(
+        Math.round(Math.random() * 360),
+        Number(Math.random().toFixed(2)),
+        Number(Math.random().toFixed(2)),
+    );
+}
+
+/** Generates a random HSL color. */
+export function randomHSB(): HSBColor {
+    return hsb(
+        Math.round(Math.random() * 360),
+        Number(Math.random().toFixed(2)),
+        Number(Math.random().toFixed(2)),
+    );
+}
+
+/** Generates a random HSL color. */
+export function randomHWB(): HWBColor {
+    return hwb(
+        Math.round(Math.random() * 360),
+        Number(Math.random().toFixed(2)),
+        Number(Math.random().toFixed(2)),
+    );
+}
+
+/** Generates a random CMYK color. */
+export function randomCMYK(): CMYKColor {
+    return cmyk(
+        Number(Math.random().toFixed(2)),
+        Number(Math.random().toFixed(2)),
+        Number(Math.random().toFixed(2)),
+        Number(Math.random().toFixed(2)),
+    );
+}
+
 export * from './colors/mod.ts';
